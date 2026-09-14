@@ -1,0 +1,38 @@
+[
+  {
+    "user": "6a5dcf6cd45d475e6287af0d",
+    "type": "investment",
+    "amount": 90,
+    "currency": "USD",
+    "status": "completed",
+    "reference": "INV-68EC0F8F",
+    "description": "Investment in Starter",
+    "investmentId": "6a5dcf6cd45d475e6287af3c",
+    "createdAt": "2025-08-24T03:07:37.000Z",
+    "updatedAt": "2025-08-24T06:23:36.000Z"
+  },
+  {
+    "user": "6a5dcf6cd45d475e6287af0d",
+    "type": "withdrawal",
+    "amount": 264,
+    "currency": "USD",
+    "status": "completed",
+    "reference": "WTH-78F3B2CC",
+    "description": "Withdrawal via usdt",
+    "withdrawalId": "6a5dcf6cd45d475e6287af43",
+    "createdAt": "2025-09-03T17:43:02.000Z",
+    "updatedAt": "2025-09-04T13:01:15.000Z"
+  },
+  {
+    "user": "6a5dcf6cd45d475e6287af11",
+    "type": "withdrawal",
+    "amount": 5000,
+    "currency": "USD",
+    "status": "completed",
+    "reference": "WTH-702A09B0",
+    "description": "Withdrawal via usdt",
+    "withdrawalId": "6a5dcf6cd45d475e6287af44",
+    "createdAt": "2025-09-05T02:37:42.000Z",
+    "updatedAt": "2025-09-06T03:39:36.000Z"
+  }
+]

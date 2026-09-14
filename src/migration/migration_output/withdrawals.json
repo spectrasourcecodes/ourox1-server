@@ -1,0 +1,98 @@
+[
+  {
+    "_id": "6a5dcf6cd45d475e6287af3d",
+    "user": "6a5dcf6cd45d475e6287af0d",
+    "amount": 346,
+    "currency": "USD",
+    "cryptoCurrency": "BTC",
+    "walletAddress": "hdhu87927fjsafjdfsd86r",
+    "status": "pending",
+    "reference": "WTH-314FE93D",
+    "createdAt": "2025-09-02T21:46:52.000Z",
+    "updatedAt": "2025-09-02T21:46:52.000Z"
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af3e",
+    "user": "6a5dcf6cd45d475e6287af0d",
+    "amount": 264,
+    "currency": "USD",
+    "cryptoCurrency": "BTC",
+    "walletAddress": "hdhu87927fjsafjdfsd86r",
+    "status": "pending",
+    "reference": "WTH-7D1FAD89",
+    "createdAt": "2025-09-03T17:28:40.000Z",
+    "updatedAt": "2025-09-03T18:37:59.000Z"
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af3f",
+    "user": "6a5dcf6cd45d475e6287af0d",
+    "amount": 7846,
+    "currency": "USD",
+    "cryptoCurrency": "BTC",
+    "walletAddress": "hdhu87927fjsafjdfsd86r",
+    "status": "pending",
+    "reference": "WTH-70B49D17",
+    "createdAt": "2025-09-03T17:30:02.000Z",
+    "updatedAt": "2025-09-03T18:22:52.000Z"
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af40",
+    "user": "6a5dcf6cd45d475e6287af0d",
+    "amount": 264,
+    "currency": "USD",
+    "cryptoCurrency": "BTC",
+    "walletAddress": "hdhu87927fjsafjdfsd86r",
+    "status": "pending",
+    "reference": "WTH-5BF648A0",
+    "createdAt": "2025-09-03T17:33:21.000Z",
+    "updatedAt": "2025-09-03T17:33:21.000Z"
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af41",
+    "user": "6a5dcf6cd45d475e6287af0d",
+    "amount": 264,
+    "currency": "USD",
+    "cryptoCurrency": "BTC",
+    "walletAddress": "hdhu87927fjsafjdfsd86r",
+    "status": "pending",
+    "reference": "WTH-68E50390",
+    "createdAt": "2025-09-03T17:37:03.000Z",
+    "updatedAt": "2025-09-03T17:37:03.000Z"
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af42",
+    "user": "6a5dcf6cd45d475e6287af0d",
+    "amount": 264,
+    "currency": "USD",
+    "cryptoCurrency": "BTC",
+    "walletAddress": "hdhu87927fjsafjdfsd86r",
+    "status": "pending",
+    "reference": "WTH-A4344994",
+    "createdAt": "2025-09-03T17:38:44.000Z",
+    "updatedAt": "2025-09-03T17:38:44.000Z"
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af43",
+    "user": "6a5dcf6cd45d475e6287af0d",
+    "amount": 264,
+    "currency": "USD",
+    "cryptoCurrency": "USDT",
+    "walletAddress": "hdhu87927fjsafjdfsd86r",
+    "status": "completed",
+    "reference": "WTH-0383B2A9",
+    "createdAt": "2025-09-03T17:43:02.000Z",
+    "updatedAt": "2025-09-04T13:01:15.000Z"
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af44",
+    "user": "6a5dcf6cd45d475e6287af11",
+    "amount": 5000,
+    "currency": "USD",
+    "cryptoCurrency": "USDT",
+    "walletAddress": "bc1qgt8ux7xdm752w7jq6r674d3vtqqe6cywxcckgw",
+    "status": "completed",
+    "reference": "WTH-B0B941F7",
+    "createdAt": "2025-09-05T02:37:42.000Z",
+    "updatedAt": "2025-09-06T03:39:36.000Z"
+  }
+]

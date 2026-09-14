@@ -1,0 +1,58 @@
+[
+  {
+    "user": "6a5dcf6cd45d475e6287af0e",
+    "personalInfo": {
+      "fullName": "",
+      "dateOfBirth": null,
+      "gender": "",
+      "nationality": "",
+      "address": "",
+      "occupation": ""
+    },
+    "governmentId": {
+      "type": "passport",
+      "frontImage": "",
+      "backImage": "",
+      "idNumber": "bc1qgt8ux7xdm752w7jq6r674d3vtqqe6cywxcckgw"
+    },
+    "selfieImage": "",
+    "proofOfAddress": "",
+    "status": "pending",
+    "stepsCompleted": {
+      "personalInfo": true,
+      "governmentId": true,
+      "selfie": true,
+      "proofOfAddress": true
+    },
+    "createdAt": "2026-07-20T07:34:04.660Z",
+    "updatedAt": "2025-10-22T17:12:31.000Z"
+  },
+  {
+    "user": "6a5dcf6cd45d475e6287af0f",
+    "personalInfo": {
+      "fullName": "",
+      "dateOfBirth": null,
+      "gender": "",
+      "nationality": "",
+      "address": "",
+      "occupation": ""
+    },
+    "governmentId": {
+      "type": "driver_license",
+      "frontImage": "",
+      "backImage": "",
+      "idNumber": "0xF49cb6363B13b0DF5304214b694F4d450b36527C"
+    },
+    "selfieImage": "",
+    "proofOfAddress": "",
+    "status": "pending",
+    "stepsCompleted": {
+      "personalInfo": true,
+      "governmentId": true,
+      "selfie": true,
+      "proofOfAddress": true
+    },
+    "createdAt": "2026-07-20T07:34:04.660Z",
+    "updatedAt": "2025-10-22T17:13:54.000Z"
+  }
+]

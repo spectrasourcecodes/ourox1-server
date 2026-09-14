@@ -1,0 +1,12 @@
+[
+  {
+    "user": "6a5dcf6cd45d475e6287af0d",
+    "title": "Notification",
+    "message": "payment have been made for your withdrwal of $264.00 to your wallet",
+    "type": "info",
+    "read": false,
+    "data": {},
+    "createdAt": "2025-09-08T18:13:27.000Z",
+    "updatedAt": "2025-09-08T18:13:27.000Z"
+  }
+]

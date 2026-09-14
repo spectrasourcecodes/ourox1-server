@@ -1,0 +1,27 @@
+[
+  {
+    "_id": "6a5dcf6cd45d475e6287af3c",
+    "user": "6a5dcf6cd45d475e6287af0d",
+    "plan": "6a5abf45a78b6bcedf3dd480",
+    "amount": 90,
+    "currency": "USD",
+    "startDate": "2025-08-24T03:07:37.000Z",
+    "endDate": "2025-09-23T03:07:37.000Z",
+    "totalROI": 0,
+    "status": "completed",
+    "planSnapshot": {
+      "name": "Starter",
+      "dailyROI": 0.5,
+      "duration": 30,
+      "expectedProfit": 15
+    },
+    "roiCredits": [],
+    "completedAt": "2025-09-23T03:07:37.000Z",
+    "reference": "INV-68EC0F8F",
+    "proofImage": "",
+    "paymentDetails": {},
+    "paymentConfirmed": true,
+    "createdAt": "2025-08-24T03:07:37.000Z",
+    "updatedAt": "2025-08-24T06:23:36.000Z"
+  }
+]

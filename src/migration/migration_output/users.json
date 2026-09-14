@@ -1,0 +1,942 @@
+[
+  {
+    "_id": "6a5dcf6cd45d475e6287af0d",
+    "fullName": "BillGateJnr",
+    "email": "yahayaabdulbari13@gmail.com",
+    "phone": "08133665713",
+    "country": "Nigeria",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": true,
+    "referralCode": "REF001",
+    "createdAt": "2025-08-24T02:21:17.000Z",
+    "updatedAt": "2026-06-20T00:01:05.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af0e",
+    "fullName": "future funds",
+    "email": "futurefunds@gmail.com",
+    "phone": "07043646762",
+    "country": "Nigeria",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": true,
+    "referralCode": "REF002",
+    "createdAt": "2025-08-24T03:07:37.000Z",
+    "updatedAt": "2025-08-29T09:32:04.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af0f",
+    "fullName": "chanyoo",
+    "email": "chanyoo281@gmail.com",
+    "phone": "07043646243",
+    "country": "china",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF003",
+    "createdAt": "2025-08-24T03:09:28.000Z",
+    "updatedAt": "2025-08-24T07:24:34.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af10",
+    "fullName": "nazy",
+    "email": "senelnazy@gmail.com",
+    "phone": "08133665985",
+    "country": "Nigeria",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF004",
+    "createdAt": "2025-08-24T06:23:36.000Z",
+    "updatedAt": "2025-08-24T06:23:36.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af11",
+    "fullName": "Angela",
+    "email": "angelamartina347@gmail.com",
+    "phone": "07040557323",
+    "country": "Nigeria",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": true,
+    "referralCode": "REF005",
+    "createdAt": "2025-08-26T11:38:43.000Z",
+    "updatedAt": "2025-09-06T03:32:00.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af12",
+    "fullName": "Leomi Silveira",
+    "email": "SilveiraLeoni@gmail.com",
+    "phone": "+5521983821939",
+    "country": "Brazil",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": true,
+    "referralCode": "REF006",
+    "createdAt": "2025-08-29T05:25:32.000Z",
+    "updatedAt": "2026-06-30T01:24:54.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af13",
+    "fullName": "Richardo",
+    "email": "richardlim236@gmail.com",
+    "phone": "07033578695",
+    "country": "Nigeria",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF007",
+    "createdAt": "2025-08-30T21:08:53.000Z",
+    "updatedAt": "2025-09-08T20:10:21.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af14",
+    "fullName": "Jailton Gomes dos Santos",
+    "email": "jailtongomesdossantos7@gmail.com",
+    "phone": "14999100732",
+    "country": "Brasil",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF008",
+    "createdAt": "2025-09-01T01:24:03.000Z",
+    "updatedAt": "2025-09-01T01:24:39.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af15",
+    "fullName": "Ângela Fátima Távora de Oliveira",
+    "email": "angela.eleeu@gmail.com",
+    "phone": "55 21 99869.0510",
+    "country": "Brasil",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": true,
+    "referralCode": "REF009",
+    "createdAt": "2025-09-05T03:33:59.000Z",
+    "updatedAt": "2026-07-01T06:22:33.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af16",
+    "fullName": "Martina Monteiro",
+    "email": "martinamonteiro543@gmail.com",
+    "phone": "11979506723",
+    "country": "Brasil",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": true,
+    "referralCode": "REF010",
+    "createdAt": "2025-09-08T09:17:07.000Z",
+    "updatedAt": "2026-05-28T22:21:35.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af17",
+    "fullName": "Jaqueline Gomes costa",
+    "email": "jaquelinegomescosta09@gmail.com",
+    "phone": "77_60 39 4533",
+    "country": "Brasil",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF011",
+    "createdAt": "2025-09-08T20:21:39.000Z",
+    "updatedAt": "2025-09-09T08:03:49.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af18",
+    "fullName": "mohamedbougherara1976@gmail.com",
+    "email": "mohamedbougherara1976@gmail.com",
+    "phone": "0213773374260",
+    "country": "Algérie",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF012",
+    "createdAt": "2025-09-16T02:58:33.000Z",
+    "updatedAt": "2025-12-08T23:51:19.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af19",
+    "fullName": "Fabrício da Silva Pereira",
+    "email": "silvapereirafabricio17@gmail.com",
+    "phone": "11917626912",
+    "country": "Brasil",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF013",
+    "createdAt": "2025-09-22T11:05:08.000Z",
+    "updatedAt": "2025-09-22T11:14:05.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af1a",
+    "fullName": "Maria de Lourdes Fernandes Santos",
+    "email": "lordesmaria259@gmail.com",
+    "phone": "11987101926",
+    "country": "Brasil",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": true,
+    "referralCode": "REF014",
+    "createdAt": "2025-09-29T23:24:52.000Z",
+    "updatedAt": "2025-10-30T00:40:27.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af1b",
+    "fullName": "Janete de carvalho",
+    "email": "Janetecarvalho72@gmail.com",
+    "phone": "19994912367",
+    "country": "Brasil",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF015",
+    "createdAt": "2025-10-15T03:46:12.000Z",
+    "updatedAt": "2025-10-16T02:02:05.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af1c",
+    "fullName": "Jaiton",
+    "email": "wm1717138@gmail.com",
+    "phone": "+559291407587",
+    "country": "Brazil",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF016",
+    "createdAt": "2025-10-25T07:24:57.000Z",
+    "updatedAt": "2025-10-25T07:24:57.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af1d",
+    "fullName": "Solange Rezende",
+    "email": "soniarezendegermano@gmail.com",
+    "phone": "21973060564",
+    "country": "Brazil",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF017",
+    "createdAt": "2025-10-26T20:21:09.000Z",
+    "updatedAt": "2025-10-26T20:21:09.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af1e",
+    "fullName": "Iolanda",
+    "email": "iolandaargiolas@gmail.com",
+    "phone": "3497701763",
+    "country": "Italia",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF018",
+    "createdAt": "2025-11-04T01:30:01.000Z",
+    "updatedAt": "2025-11-04T01:30:01.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af1f",
+    "fullName": "Peet45",
+    "email": "peetie101@gmail.com",
+    "phone": "0742797407",
+    "country": "South Africa",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF019",
+    "createdAt": "2025-12-11T15:56:21.000Z",
+    "updatedAt": "2025-12-11T15:56:53.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af20",
+    "fullName": "Levy76",
+    "email": "lazarlevente2018@gmail.com",
+    "phone": "06306839020",
+    "country": "Magyarország",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF020",
+    "createdAt": "2025-12-20T16:11:50.000Z",
+    "updatedAt": "2026-01-11T22:08:30.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af21",
+    "fullName": "Jacare71",
+    "email": "christianmencaroni71@gmail.com",
+    "phone": "+393792088075",
+    "country": "Italia",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF021",
+    "createdAt": "2025-12-25T02:04:38.000Z",
+    "updatedAt": "2025-12-25T02:07:05.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af22",
+    "fullName": "Ariel Fernando Medina",
+    "email": "medinaarielfernando22@gmail.com",
+    "phone": "3863578434",
+    "country": "Argentina",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF022",
+    "createdAt": "2026-01-03T08:02:35.000Z",
+    "updatedAt": "2026-02-08T01:32:35.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af23",
+    "fullName": "Jacare",
+    "email": "mencaronichristian26@gmail.com",
+    "phone": "3792088075",
+    "country": "Italia",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": true,
+    "referralCode": "REF023",
+    "createdAt": "2026-01-12T12:22:50.000Z",
+    "updatedAt": "2026-03-02T16:36:02.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af24",
+    "fullName": "FETHI .ACHOURTANI",
+    "email": "achourtani.fethi@hotmail.com",
+    "phone": "0743608493",
+    "country": "France",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF024",
+    "createdAt": "2026-01-17T01:28:04.000Z",
+    "updatedAt": "2026-04-08T00:23:44.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af25",
+    "fullName": "Marylyn leny Marques pereira daSilva",
+    "email": "dadapedrolucastuturiquelme@gmail.com",
+    "phone": "21998556219",
+    "country": "Brasil",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": true,
+    "referralCode": "REF025",
+    "createdAt": "2026-01-20T06:58:02.000Z",
+    "updatedAt": "2026-01-24T09:21:43.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af26",
+    "fullName": "jwilliams8270",
+    "email": "m.a.r.k.jay.mar.i.l.aw@gmail.com",
+    "phone": "+32984931402",
+    "country": "Filipijnen",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF026",
+    "createdAt": "2026-01-23T03:27:36.000Z",
+    "updatedAt": "2026-01-23T03:27:59.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af27",
+    "fullName": "Omar Fernando",
+    "email": "omarfernandoortiz82@gmail.com",
+    "phone": "+527224611845",
+    "country": "México",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF027",
+    "createdAt": "2026-02-10T10:25:39.000Z",
+    "updatedAt": "2026-02-18T22:26:13.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af28",
+    "fullName": "Francisco Pereira dos Sanros",
+    "email": "flckdoni@gmail.com",
+    "phone": "+5511983646154",
+    "country": "Brasil",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF028",
+    "createdAt": "2026-02-19T09:13:28.000Z",
+    "updatedAt": "2026-02-23T10:09:54.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af29",
+    "fullName": "Daylinda",
+    "email": "alingigdaylinda@gmail.com",
+    "phone": "09928369500",
+    "country": "Philippines",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": true,
+    "referralCode": "REF029",
+    "createdAt": "2026-02-19T11:36:41.000Z",
+    "updatedAt": "2026-02-21T11:31:58.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af2a",
+    "fullName": "Aurelian28",
+    "email": "sarbuaurelian15@gmail.com",
+    "phone": "O743030300",
+    "country": "Romania",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": true,
+    "referralCode": "REF030",
+    "createdAt": "2026-02-19T18:39:38.000Z",
+    "updatedAt": "2026-06-22T04:19:17.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af2b",
+    "fullName": "Richard Edward",
+    "email": "harrystyiesofficial692@gmail.com",
+    "phone": "08118031025",
+    "country": "Nigeria",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": true,
+    "referralCode": "REF031",
+    "createdAt": "2026-02-20T07:18:15.000Z",
+    "updatedAt": "2026-02-22T12:17:04.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af2c",
+    "fullName": "Володимир",
+    "email": "grigorcukvladimir319@gmail.com",
+    "phone": "+80986770935",
+    "country": "Україна",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF032",
+    "createdAt": "2026-02-22T11:01:18.000Z",
+    "updatedAt": "2026-02-22T11:39:05.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af2d",
+    "fullName": "Charlize Theron",
+    "email": "charlizetheronoffiicial880@gmail.com",
+    "phone": "09031830582",
+    "country": "Nigeria",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": true,
+    "referralCode": "REF033",
+    "createdAt": "2026-02-23T04:30:56.000Z",
+    "updatedAt": "2026-05-28T19:46:23.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af2e",
+    "fullName": "Herbowo",
+    "email": "herbowotrinugroho72@gmail.com",
+    "phone": "+60 425-79036",
+    "country": "Malaysia",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF034",
+    "createdAt": "2026-02-24T02:05:16.000Z",
+    "updatedAt": "2026-02-24T02:06:15.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af2f",
+    "fullName": "Frank100000001",
+    "email": "enrico.lacaria@gmail.com",
+    "phone": "3491287073",
+    "country": "Italia",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF035",
+    "createdAt": "2026-02-25T14:44:07.000Z",
+    "updatedAt": "2026-02-25T14:44:35.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af30",
+    "fullName": "Ziedonis Kalnins",
+    "email": "ziedonis.kalnins@inbox.lv",
+    "phone": "+371 2912 0823",
+    "country": "Latvija",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF036",
+    "createdAt": "2026-02-28T09:28:58.000Z",
+    "updatedAt": "2026-03-06T03:31:33.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af31",
+    "fullName": "Djamal boudjaoui",
+    "email": "djamalboudjaoui8@gmail.com",
+    "phone": "+213659078608",
+    "country": "Algérie",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF037",
+    "createdAt": "2026-03-02T19:02:59.000Z",
+    "updatedAt": "2026-03-16T18:07:11.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af32",
+    "fullName": "Rosemeire",
+    "email": "eurosa3030@gmail.com",
+    "phone": "14998016585",
+    "country": "Brasil",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": true,
+    "referralCode": "REF038",
+    "createdAt": "2026-03-04T05:37:51.000Z",
+    "updatedAt": "2026-03-04T05:41:06.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af33",
+    "fullName": "Jan-Erik",
+    "email": "janchyk60@gmail.com",
+    "phone": "+4741518602",
+    "country": "Norway",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF039",
+    "createdAt": "2026-03-12T01:11:57.000Z",
+    "updatedAt": "2026-03-13T00:48:13.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af34",
+    "fullName": "Mario Torres yucra",
+    "email": "elmariotorress@gmail.com",
+    "phone": "+ 549 221 308 51 10",
+    "country": "Argentina",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF040",
+    "createdAt": "2026-03-15T23:39:40.000Z",
+    "updatedAt": "2026-03-15T23:41:16.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af35",
+    "fullName": "Sonia Meneghetti",
+    "email": "Sonia_meneghetti@hotmail.com",
+    "phone": "13991072542",
+    "country": "Brasil",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": true,
+    "referralCode": "REF041",
+    "createdAt": "2026-03-16T07:11:57.000Z",
+    "updatedAt": "2026-07-06T06:20:43.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af36",
+    "fullName": "Ahmed Moyi",
+    "email": "ahmedmoyi@gmail.com",
+    "phone": "07037276489",
+    "country": "Nigeria",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF042",
+    "createdAt": "2026-03-31T01:31:10.000Z",
+    "updatedAt": "2026-03-31T01:33:46.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af37",
+    "fullName": "richardedward8512@gmail.com",
+    "email": "richardedward8512@gmail.com",
+    "phone": "0903 1830 582",
+    "country": "Nigeria",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": true,
+    "referralCode": "REF043",
+    "createdAt": "2026-03-31T01:51:58.000Z",
+    "updatedAt": "2026-03-31T02:04:21.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af38",
+    "fullName": "JULIA E DIEGO M",
+    "email": "diegojuli67@Mail.com",
+    "phone": "599 96835760",
+    "country": "CURACAO",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": true,
+    "referralCode": "REF044",
+    "createdAt": "2026-05-29T03:57:55.000Z",
+    "updatedAt": "2026-07-08T16:29:45.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af39",
+    "fullName": "mxipssigdo",
+    "email": "tkviprku@immenseignite.info",
+    "phone": "+1-704-991-3461",
+    "country": "iidxvooyuk",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF045",
+    "createdAt": "2026-06-02T02:14:42.000Z",
+    "updatedAt": "2026-06-02T02:14:44.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af3a",
+    "fullName": "vjzvlzhyfv",
+    "email": "sminxqnk@immenseignite.info",
+    "phone": "+1-186-424-8543",
+    "country": "pgurjyfeiv",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "user",
+    "isActive": true,
+    "isVerified": false,
+    "referralCode": "REF046",
+    "createdAt": "2026-06-02T02:14:49.000Z",
+    "updatedAt": "2026-06-02T02:14:57.000Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  },
+  {
+    "_id": "6a5dcf6cd45d475e6287af3b",
+    "fullName": "Ark Investment",
+    "email": "arkadmin@gmail.com",
+    "phone": "+12345678910",
+    "country": "Unknown",
+    "currency": "USD",
+    "password": "$2b$10$eRxnRfUYCNPb6I6Umu/ZVexvgjWyooq6Qj5O2afSNDoiVm.s4HoKu",
+    "role": "admin",
+    "isActive": true,
+    "isVerified": true,
+    "referralCode": "REF047",
+    "createdAt": "2026-07-20T07:34:04.657Z",
+    "updatedAt": "2026-07-20T07:34:04.657Z",
+    "settings": {
+      "emailNotifications": true,
+      "pushNotifications": true
+    },
+    "twoFactorEnabled": false
+  }
+]

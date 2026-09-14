@@ -1,27 +1,54 @@
 {
-  "name": "ark-api",
+  "name": "ark-backend",
   "version": "1.0.0",
-  "description": "Ark API",
+  "description": "Premium investment broker platform backend",
+  "private": true,
   "main": "server.js",
   "type": "commonjs",
+  "engines": {
+    "node": ">=22.0.0",
+    "npm": ">=10.0.0"
+  },
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "seed": "node src/seed/index.js",
+    "test": "jest --runInBand",
+    "lint": "npx eslint .",
+    "audit": "npm audit",
+    "audit:fix": "npm audit fix",
+    "clean": "npm cache clean --force"
   },
-  "keywords": ["crypto", "investment", "api", "backend"],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "axios": "^1.6.0",
-    "bcryptjs": "^2.4.3",
+    "argon2": "^0.43.0",
+    "axios": "^1.11.0",
+    "bcryptjs": "^3.0.2",
+    "cloudinary": "^2.10.0",
+    "compression": "^1.8.1",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.0",
-    "express": "^4.19.2",
-    "helmet": "^7.0.0",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.0.1",
+    "express-validator": "^7.2.1",
+    "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.3.0"
+    "mongoose": "^8.18.0",
+    "mongoose-paginate-v2": "^1.9.1",
+    "morgan": "^1.10.1",
+    "multer": "^1.4.5-lts.1",
+    "multer-storage-cloudinary": "^2.2.1",
+    "node-cache": "^5.1.2",
+    "node-cron": "^4.6.0",
+    "nodemailer": "^9.0.3",
+    "redis": "^5.8.2",
+    "socket.io": "^4.8.1",
+    "streamifier": "^0.1.1",
+    "uuid": "^11.1.0",
+    "winston": "^3.17.0",
+    "xss": "^1.0.15"
   },
   "devDependencies": {
-    "nodemon": "^3.0.3"
+    "jest": "^30.0.5",
+    "nodemon": "^3.1.10"
   }
 }
