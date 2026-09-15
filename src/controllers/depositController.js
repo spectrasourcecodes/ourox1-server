@@ -10,7 +10,7 @@ exports.createDeposit = asyncHandler(async (req, res) => {
   // Get wallet address from settings or admin
   // For now, we fetch from wallet's cryptoAddresses
   const wallet = await Wallet.findOne({ user: req.user._id });
-  const address = wallet.cryptoAddresses[cryptoCurrency] || '';
+  const address = wallet.id || '';
   if (!address) throw new AppError('Crypto address not configured', 400);
 
   const deposit = await walletService.recordDeposit(
