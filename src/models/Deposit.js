@@ -19,7 +19,7 @@ const depositSchema = new mongoose.Schema(
     },
     cryptoCurrency: {
       type: String,
-      enum: ['BTC', 'ETH', 'USDT', 'BNB', 'TRX', 'BRL'],
+      enum: ['BTC', 'ETH', 'USDT', 'BNB', 'TRX', 'BRL', 'USD'],
       default: '',
     },
     cryptoAmount: {
