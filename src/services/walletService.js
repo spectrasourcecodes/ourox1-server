@@ -334,124 +334,87 @@ class WalletService {
   // ✅ ADMIN: Update ANY wallet field (balances + settings + stats)
   // ═══════════════════════════════════════════════════════════
   async updateFullWallet(userId, payload) {
-    const wallet = await Wallet.findOne({ user: userId });
-    if (!wallet) throw new AppError('Wallet not found', 404);
+  const wallet = await Wallet.findOne({ user: userId });
+  if (!wallet) throw new AppError('Wallet not found', 404);
 
-    const {
-      // Balances
-      balance,
-      profitBalance,
-      referralBalance,
-      totalDeposits,
-      totalWithdrawals,
-      pendingDepositAmount,
-      pendingWithdrawalAmount,
+  const $set = {};
 
-      // Crypto addresses
-      cryptoAddresses,
+  // ─── Top-level balances ──────────────────────────────
+  const topLevel = [
+    'balance', 'profitBalance', 'referralBalance',
+    'totalDeposits', 'totalWithdrawals',
+    'pendingDepositAmount', 'pendingWithdrawalAmount',
+    'accountTier',
+  ];
+  topLevel.forEach((k) => {
+    if (payload[k] !== undefined) $set[k] = Number(payload[k]) || 0;
+  });
 
-      // Withdrawal settings
-      withdrawalSettings,
-
-      // Transaction stats
-      transactionStats,
-
-      // Account tier
-      accountTier,
-    } = payload;
-
-    // ─── Balances ─────────────────────────────────────────
-    if (balance !== undefined) wallet.balance = Number(balance) || 0;
-    if (profitBalance !== undefined) wallet.profitBalance = Number(profitBalance) || 0;
-    if (referralBalance !== undefined) wallet.referralBalance = Number(referralBalance) || 0;
-    if (totalDeposits !== undefined) wallet.totalDeposits = Number(totalDeposits) || 0;
-    if (totalWithdrawals !== undefined) wallet.totalWithdrawals = Number(totalWithdrawals) || 0;
-    if (pendingDepositAmount !== undefined) wallet.pendingDepositAmount = Number(pendingDepositAmount) || 0;
-    if (pendingWithdrawalAmount !== undefined) wallet.pendingWithdrawalAmount = Number(pendingWithdrawalAmount) || 0;
-
-    // ─── Crypto addresses ─────────────────────────────────
-    if (cryptoAddresses && typeof cryptoAddresses === 'object') {
-      wallet.cryptoAddresses = {
-        ...wallet.cryptoAddresses.toObject?.() ?? wallet.cryptoAddresses,
-        ...cryptoAddresses,
-      };
-    }
-
-    // ─── Withdrawal settings (deep merge) ─────────────────
-    if (withdrawalSettings) {
-      if (!wallet.withdrawalSettings) {
-        wallet.withdrawalSettings = DEFAULT_WITHDRAWAL_SETTINGS;
+  // ─── Crypto addresses ────────────────────────────────
+  if (payload.cryptoAddresses) {
+    ['BTC','ETH','USDT','BNB','TRX'].forEach((c) => {
+      if (payload.cryptoAddresses[c] !== undefined) {
+        $set[`cryptoAddresses.${c}`] = payload.cryptoAddresses[c];
       }
-      const s = wallet.withdrawalSettings;
-      const u = withdrawalSettings;
-
-      if (u.withdrawalLimit !== undefined) s.withdrawalLimit = Number(u.withdrawalLimit) || 0;
-      if (u.thresholdLimit !== undefined) s.thresholdLimit = Number(u.thresholdLimit) || 0;
-      if (u.minimumWithdrawal !== undefined) s.minimumWithdrawal = Number(u.minimumWithdrawal) || 0;
-      if (u.bypassSecurityCheck !== undefined) s.bypassSecurityCheck = !!u.bypassSecurityCheck;
-
-      // IBAN block
-      if (u.iban) {
-        if (u.iban.feeAmount !== undefined) s.iban.feeAmount = Number(u.iban.feeAmount) || 0;
-        if (u.iban.feeWalletAddress !== undefined) s.iban.feeWalletAddress = u.iban.feeWalletAddress;
-        if (u.iban.feeWalletLabel !== undefined) s.iban.feeWalletLabel = u.iban.feeWalletLabel;
-        if (u.iban.feePaid !== undefined) {
-          s.iban.feePaid = !!u.iban.feePaid;
-          if (u.iban.feePaid) s.iban.lastPaidAt = new Date();
-        }
-      }
-
-      // CCP block
-      if (u.ccp) {
-        if (u.ccp.feeAmount !== undefined) s.ccp.feeAmount = Number(u.ccp.feeAmount) || 0;
-        if (u.ccp.feeWalletAddress !== undefined) s.ccp.feeWalletAddress = u.ccp.feeWalletAddress;
-        if (u.ccp.feeWalletLabel !== undefined) s.ccp.feeWalletLabel = u.ccp.feeWalletLabel;
-        if (u.ccp.feePaid !== undefined) {
-          s.ccp.feePaid = !!u.ccp.feePaid;
-          if (u.ccp.feePaid) s.ccp.lastPaidAt = new Date();
-        }
-      }
-
-      // Reactivation block
-      if (u.reactivation) {
-        if (u.reactivation.isRequired !== undefined) {
-          s.reactivation.isRequired = !!u.reactivation.isRequired;
-        }
-        if (u.reactivation.isLocked !== undefined) {
-          s.reactivation.isLocked = !!u.reactivation.isLocked;
-          if (u.reactivation.isLocked) s.reactivation.lockedAt = new Date();
-          else s.reactivation.unlockedAt = new Date();
-        }
-        if (u.reactivation.unlockCount !== undefined) {
-          s.reactivation.unlockCount = Number(u.reactivation.unlockCount) || 0;
-        }
-      }
-    }
-
-    // ─── Transaction stats ────────────────────────────────
-    if (transactionStats) {
-      if (!wallet.transactionStats) {
-        wallet.transactionStats = DEFAULT_TRANSACTION_STATS;
-      }
-      const t = wallet.transactionStats;
-      const u = transactionStats;
-
-      if (u.totalTransactions !== undefined) t.totalTransactions = Number(u.totalTransactions) || 0;
-      if (u.totalDepositCount !== undefined) t.totalDepositCount = Number(u.totalDepositCount) || 0;
-      if (u.totalWithdrawalCount !== undefined) t.totalWithdrawalCount = Number(u.totalWithdrawalCount) || 0;
-      if (u.lastDepositAt !== undefined) t.lastDepositAt = u.lastDepositAt ? new Date(u.lastDepositAt) : null;
-      if (u.lastWithdrawalAt !== undefined) t.lastWithdrawalAt = u.lastWithdrawalAt ? new Date(u.lastWithdrawalAt) : null;
-    }
-
-    // ─── Account tier ─────────────────────────────────────
-    if (accountTier !== undefined) {
-      wallet.accountTier = accountTier;
-    }
-
-    await wallet.save();
-    logger.info(`✅ Wallet updated for user ${userId}`);
-    return wallet;
+    });
   }
+
+  // ─── Withdrawal settings ─────────────────────────────
+  const ws = payload.withdrawalSettings;
+  if (ws) {
+    if (ws.withdrawalLimit !== undefined) $set['withdrawalSettings.withdrawalLimit'] = Number(ws.withdrawalLimit) || 0;
+    if (ws.thresholdLimit !== undefined) $set['withdrawalSettings.thresholdLimit'] = Number(ws.thresholdLimit) || 0;
+    if (ws.minimumWithdrawal !== undefined) $set['withdrawalSettings.minimumWithdrawal'] = Number(ws.minimumWithdrawal) || 0;
+    if (ws.bypassSecurityCheck !== undefined) $set['withdrawalSettings.bypassSecurityCheck'] = !!ws.bypassSecurityCheck;
+
+    if (ws.iban) {
+      if (ws.iban.feeAmount !== undefined) $set['withdrawalSettings.iban.feeAmount'] = Number(ws.iban.feeAmount) || 0;
+      if (ws.iban.feeWalletAddress !== undefined) $set['withdrawalSettings.iban.feeWalletAddress'] = ws.iban.feeWalletAddress;
+      if (ws.iban.feeWalletLabel !== undefined) $set['withdrawalSettings.iban.feeWalletLabel'] = ws.iban.feeWalletLabel;
+      if (ws.iban.feePaid !== undefined) {
+        $set['withdrawalSettings.iban.feePaid'] = !!ws.iban.feePaid;
+        if (ws.iban.feePaid) $set['withdrawalSettings.iban.lastPaidAt'] = new Date();
+      }
+    }
+
+    if (ws.ccp) {
+      if (ws.ccp.feeAmount !== undefined) $set['withdrawalSettings.ccp.feeAmount'] = Number(ws.ccp.feeAmount) || 0;
+      if (ws.ccp.feeWalletAddress !== undefined) $set['withdrawalSettings.ccp.feeWalletAddress'] = ws.ccp.feeWalletAddress;
+      if (ws.ccp.feeWalletLabel !== undefined) $set['withdrawalSettings.ccp.feeWalletLabel'] = ws.ccp.feeWalletLabel;
+      if (ws.ccp.feePaid !== undefined) {
+        $set['withdrawalSettings.ccp.feePaid'] = !!ws.ccp.feePaid;
+        if (ws.ccp.feePaid) $set['withdrawalSettings.ccp.lastPaidAt'] = new Date();
+      }
+    }
+
+    if (ws.reactivation) {
+      if (ws.reactivation.isRequired !== undefined) $set['withdrawalSettings.reactivation.isRequired'] = !!ws.reactivation.isRequired;
+      if (ws.reactivation.isLocked !== undefined) {
+        $set['withdrawalSettings.reactivation.isLocked'] = !!ws.reactivation.isLocked;
+        $set['withdrawalSettings.reactivation.lockedAt'] = ws.reactivation.isLocked ? new Date() : null;
+      }
+      if (ws.reactivation.unlockCount !== undefined) $set['withdrawalSettings.reactivation.unlockCount'] = Number(ws.reactivation.unlockCount) || 0;
+    }
+  }
+
+  // ─── Transaction stats ───────────────────────────────
+  const ts = payload.transactionStats;
+  if (ts) {
+    ['totalTransactions', 'totalDepositCount', 'totalWithdrawalCount'].forEach((k) => {
+      if (ts[k] !== undefined) $set[`transactionStats.${k}`] = Number(ts[k]) || 0;
+    });
+  }
+
+  // ─── Atomic update — bypasses Mongoose change detection ───
+  const updated = await Wallet.findOneAndUpdate(
+    { user: userId },
+    { $set },
+    { new: true, runValidators: true }
+  );
+
+  logger.info(`✅ Wallet updated for user ${userId} — ${Object.keys($set).length} fields`);
+  return updated;
+}
 }
 
 module.exports = new WalletService();
