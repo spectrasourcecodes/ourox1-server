@@ -278,8 +278,6 @@ exports.updateSetting = asyncHandler(async (req, res) => {
   res.json({ success: true, data: setting });
 });
 
-
-
 // ============================================================
 // ADMIN WALLET CONTROLLERS
 // ============================================================
@@ -340,58 +338,71 @@ exports.toggleAdminWalletStatus = asyncHandler(async (req, res) => {
   res.json({ success: true, data: wallet });
 });
 
-
 // ============================================================
 // USER WALLET MANAGEMENT (Admin)
 // ============================================================
 
-// Get user wallet
+// ═══════════════════════════════════════════════════════════
+// ✅ GET user wallet — now guaranteed to return all fields
+// ═══════════════════════════════════════════════════════════
 exports.getUserWallet = asyncHandler(async (req, res) => {
-  const Wallet = require('../models/Wallet');
   const wallet = await Wallet.findOne({ user: req.params.id });
+
   if (!wallet) {
     throw new AppError('Wallet not found for this user', 404);
   }
+
   res.json({ success: true, data: wallet });
 });
 
-// Create user wallet (if not exists)
+// ═══════════════════════════════════════════════════════════
+// ✅ CREATE user wallet — delegates to service for full defaults
+// ═══════════════════════════════════════════════════════════
 exports.createUserWallet = asyncHandler(async (req, res) => {
-  const Wallet = require('../models/Wallet');
-  let wallet = await Wallet.findOne({ user: req.params.id });
-  if (wallet) {
-    return res.json({ success: true, data: wallet, message: 'Wallet already exists' });
-  }
-  wallet = await Wallet.create({
-    user: req.params.id,
-    balance: 0,
-    profitBalance: 0,
-    referralBalance: 0,
-    totalDeposits: 0,
-    totalWithdrawals: 0,
-  });
+  const wallet = await walletService.createWallet(req.params.id);
+
   res.status(201).json({ success: true, data: wallet });
 });
 
-// Update user wallet (balance, profitBalance, referralBalance)
+// ═══════════════════════════════════════════════════════════
+// ✅ UPDATE user wallet — DELEGATES TO SERVICE
+//    Supports ALL fields: balances, withdrawalSettings, stats, addresses, tier
+// ═══════════════════════════════════════════════════════════
 exports.updateUserWallet = asyncHandler(async (req, res) => {
-  const Wallet = require('../models/Wallet');
-  const { balance, profitBalance, referralBalance, totalDeposits, totalWithdrawals } = req.body;
-  
-  const wallet = await Wallet.findOne({ user: req.params.id });
-  if (!wallet) {
-    throw new AppError('Wallet not found for this user', 404);
-  }
+  // 🔍 Diagnostic — remove after confirming persistence works
+  console.log('═══════════════════════════════════════');
+  console.log('📥 PUT /users/:id/wallet');
+  console.log('   userId:', req.params.id);
+  console.log('   body:', JSON.stringify(req.body, null, 2));
 
-  // Update only provided fields
-  if (balance !== undefined) wallet.balance = balance;
-  if (profitBalance !== undefined) wallet.profitBalance = profitBalance;
-  if (referralBalance !== undefined) wallet.referralBalance = referralBalance;
-  if (totalDeposits !== undefined) wallet.totalDeposits = totalDeposits;
-  if (totalWithdrawals !== undefined) wallet.totalWithdrawals = totalWithdrawals;
+  const wallet = await walletService.updateFullWallet(req.params.id, req.body);
 
-  await wallet.save();
-  res.json({ success: true, data: wallet });
+  // 🔍 Diagnostic — remove after confirming
+  console.log('📤 After update — withdrawalSettings:');
+  console.log(JSON.stringify(wallet?.withdrawalSettings, null, 2));
+  console.log('═══════════════════════════════════════');
+
+  res.json({
+    success: true,
+    message: 'Wallet updated successfully',
+    data: wallet,
+  });
+});
+
+// ═══════════════════════════════════════════════════════════
+// ✅ FOCUSED UPDATE — withdrawal settings only
+// ═══════════════════════════════════════════════════════════
+exports.updateWithdrawalSettings = asyncHandler(async (req, res) => {
+  const wallet = await walletService.updateWithdrawalSettings(
+    req.params.id,
+    req.body
+  );
+
+  res.json({
+    success: true,
+    message: 'Withdrawal settings updated',
+    data: wallet,
+  });
 });
 
 // ============================================================
@@ -402,11 +413,11 @@ exports.updateUserWallet = asyncHandler(async (req, res) => {
 exports.getAdminTransactions = asyncHandler(async (req, res) => {
   const Transaction = require('../models/Transaction');
   const { page = 1, limit = 20, type, status, search } = req.query;
-  
+
   const query = {};
   if (type) query.type = type;
   if (status) query.status = status;
-  
+
   // Search by user name or reference
   if (search) {
     const users = await User.find({
@@ -421,9 +432,9 @@ exports.getAdminTransactions = asyncHandler(async (req, res) => {
       { reference: { $regex: search, $options: 'i' } }
     ];
   }
-  
+
   const skip = (parseInt(page) - 1) * parseInt(limit);
-  
+
   const [transactions, total] = await Promise.all([
     Transaction.find(query)
       .populate('user', 'fullName email name')
@@ -432,7 +443,7 @@ exports.getAdminTransactions = asyncHandler(async (req, res) => {
       .limit(parseInt(limit)),
     Transaction.countDocuments(query)
   ]);
-  
+
   res.json({
     success: true,
     data: transactions,
@@ -450,11 +461,11 @@ exports.getAdminTransactionById = asyncHandler(async (req, res) => {
   const Transaction = require('../models/Transaction');
   const transaction = await Transaction.findById(req.params.id)
     .populate('user', 'fullName email name phone');
-  
+
   if (!transaction) {
     throw new AppError('Transaction not found', 404);
   }
-  
+
   res.json({ success: true, data: transaction });
 });
 
@@ -470,7 +481,6 @@ exports.getPaymentProofs = asyncHandler(async (req, res) => {
   if (status) filter.status = status;
   if (type) filter.type = type;
 
-  // Search by user email or reference
   if (search) {
     filter.$or = [
       { userEmail: { $regex: search, $options: 'i' } },
@@ -527,13 +537,11 @@ exports.approvePaymentProof = asyncHandler(async (req, res) => {
     throw new AppError('This proof has already been approved', 400);
   }
 
-  // Update proof status
   proof.status = 'approved';
   proof.verifiedBy = req.user._id;
   proof.verifiedAt = new Date();
   await proof.save();
 
-  // If it's a deposit, credit the user's wallet
   if (proof.type === 'deposit') {
     const wallet = await Wallet.findOne({ user: proof.user });
     if (wallet) {
@@ -542,7 +550,6 @@ exports.approvePaymentProof = asyncHandler(async (req, res) => {
       await wallet.save();
     }
 
-    // Also update the associated deposit if exists
     if (proof.depositId) {
       const Deposit = require('../models/Deposit');
       await Deposit.findByIdAndUpdate(proof.depositId, {
@@ -553,7 +560,6 @@ exports.approvePaymentProof = asyncHandler(async (req, res) => {
     }
   }
 
-  // If it's an investment, activate it
   if (proof.type === 'investment') {
     const Investment = require('../models/Investment');
     if (proof.investmentId) {
@@ -572,7 +578,6 @@ exports.approvePaymentProof = asyncHandler(async (req, res) => {
     }
   }
 
-  // Create transaction record
   await Transaction.create({
     user: proof.user,
     type: proof.type === 'deposit' ? 'deposit' : 'investment',
@@ -609,7 +614,6 @@ exports.rejectPaymentProof = asyncHandler(async (req, res) => {
   proof.verifiedAt = new Date();
   await proof.save();
 
-  // Update associated deposit/investment if exists
   if (proof.depositId) {
     const Deposit = require('../models/Deposit');
     await Deposit.findByIdAndUpdate(proof.depositId, {

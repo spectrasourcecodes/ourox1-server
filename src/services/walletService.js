@@ -8,7 +8,7 @@ const logger = require('../utils/logger');
 const currencyService = require('./currencyService');
 
 // ═══════════════════════════════════════════════════════════
-// ✅ DEFAULT WITHDRAWAL SETTINGS (single source of truth)
+// DEFAULT WITHDRAWAL SETTINGS (single source of truth)
 // ═══════════════════════════════════════════════════════════
 const DEFAULT_WITHDRAWAL_SETTINGS = {
   withdrawalLimit: 1500,
@@ -48,43 +48,24 @@ const DEFAULT_TRANSACTION_STATS = {
 
 class WalletService {
   // ═══════════════════════════════════════════════════════════
-  // ✅ CREATE WALLET FOR NEW USER (with full settings)
+  // Create wallet for new user
   // ═══════════════════════════════════════════════════════════
   async createWallet(userId) {
-    // Idempotent — return existing wallet if it already exists
     const existing = await Wallet.findOne({ user: userId });
     if (existing) return existing;
 
     const wallet = new Wallet({
       user: userId,
-
-      // Balances
       balance: 0,
       profitBalance: 0,
       referralBalance: 0,
       totalDeposits: 0,
       totalWithdrawals: 0,
-
-      // Crypto addresses (empty by default)
-      cryptoAddresses: {
-        BTC: '',
-        ETH: '',
-        USDT: '',
-        BNB: '',
-        TRX: '',
-      },
-
-      // Pending amounts
+      cryptoAddresses: { BTC: '', ETH: '', USDT: '', BNB: '', TRX: '' },
       pendingDepositAmount: 0,
       pendingWithdrawalAmount: 0,
-
-      // ✅ Per-account withdrawal settings
       withdrawalSettings: DEFAULT_WITHDRAWAL_SETTINGS,
-
-      // ✅ Transaction counters
       transactionStats: DEFAULT_TRANSACTION_STATS,
-
-      // Account tier
       accountTier: 'standard',
     });
 
@@ -93,12 +74,13 @@ class WalletService {
     return wallet;
   }
 
+  // ═══════════════════════════════════════════════════════════
   // Get wallet with balance in user's currency
+  // ═══════════════════════════════════════════════════════════
   async getWallet(userId, currency = 'USD') {
     const wallet = await Wallet.findOne({ user: userId });
     if (!wallet) throw new AppError('Wallet not found', 404);
 
-    // Convert balances to user's currency
     const rates = await currencyService.getRates();
     const rate = rates[currency] || 1;
     return {
@@ -111,17 +93,170 @@ class WalletService {
     };
   }
 
+  // ═══════════════════════════════════════════════════════════
+  // ✅ ADMIN: Update ANY wallet field via atomic $set
+  //    This bypasses Mongoose's silent change detection and
+  //    guarantees every nested field is persisted.
+  // ═══════════════════════════════════════════════════════════
+  async updateFullWallet(userId, payload) {
+    const wallet = await Wallet.findOne({ user: userId });
+    if (!wallet) throw new AppError('Wallet not found for this user', 404);
+
+    const $set = {};
+
+    // ─── Top-level balances ─────────────────────────────
+    const topLevel = [
+      'balance',
+      'profitBalance',
+      'referralBalance',
+      'totalDeposits',
+      'totalWithdrawals',
+      'pendingDepositAmount',
+      'pendingWithdrawalAmount',
+    ];
+    topLevel.forEach((k) => {
+      if (payload[k] !== undefined && payload[k] !== '') {
+        $set[k] = Number(payload[k]) || 0;
+      }
+    });
+
+    // ─── Account tier ───────────────────────────────────
+    if (payload.accountTier !== undefined) {
+      $set.accountTier = payload.accountTier;
+    }
+
+    // ─── Crypto addresses ───────────────────────────────
+    if (payload.cryptoAddresses && typeof payload.cryptoAddresses === 'object') {
+      ['BTC', 'ETH', 'USDT', 'BNB', 'TRX'].forEach((c) => {
+        if (payload.cryptoAddresses[c] !== undefined) {
+          $set[`cryptoAddresses.${c}`] = payload.cryptoAddresses[c];
+        }
+      });
+    }
+
+    // ─── Withdrawal settings ────────────────────────────
+    const ws = payload.withdrawalSettings;
+    if (ws && typeof ws === 'object') {
+      if (ws.withdrawalLimit !== undefined && ws.withdrawalLimit !== '') {
+        $set['withdrawalSettings.withdrawalLimit'] = Number(ws.withdrawalLimit) || 0;
+      }
+      if (ws.thresholdLimit !== undefined && ws.thresholdLimit !== '') {
+        $set['withdrawalSettings.thresholdLimit'] = Number(ws.thresholdLimit) || 0;
+      }
+      if (ws.minimumWithdrawal !== undefined && ws.minimumWithdrawal !== '') {
+        $set['withdrawalSettings.minimumWithdrawal'] = Number(ws.minimumWithdrawal) || 0;
+      }
+      if (ws.bypassSecurityCheck !== undefined) {
+        $set['withdrawalSettings.bypassSecurityCheck'] = !!ws.bypassSecurityCheck;
+      }
+
+      // IBAN block
+      if (ws.iban && typeof ws.iban === 'object') {
+        if (ws.iban.feeAmount !== undefined && ws.iban.feeAmount !== '') {
+          $set['withdrawalSettings.iban.feeAmount'] = Number(ws.iban.feeAmount) || 0;
+        }
+        if (ws.iban.feeWalletAddress !== undefined) {
+          $set['withdrawalSettings.iban.feeWalletAddress'] = ws.iban.feeWalletAddress;
+        }
+        if (ws.iban.feeWalletLabel !== undefined) {
+          $set['withdrawalSettings.iban.feeWalletLabel'] = ws.iban.feeWalletLabel;
+        }
+        if (ws.iban.feePaid !== undefined) {
+          $set['withdrawalSettings.iban.feePaid'] = !!ws.iban.feePaid;
+          if (ws.iban.feePaid) {
+            $set['withdrawalSettings.iban.lastPaidAt'] = new Date();
+          }
+        }
+      }
+
+      // CCP block
+      if (ws.ccp && typeof ws.ccp === 'object') {
+        if (ws.ccp.feeAmount !== undefined && ws.ccp.feeAmount !== '') {
+          $set['withdrawalSettings.ccp.feeAmount'] = Number(ws.ccp.feeAmount) || 0;
+        }
+        if (ws.ccp.feeWalletAddress !== undefined) {
+          $set['withdrawalSettings.ccp.feeWalletAddress'] = ws.ccp.feeWalletAddress;
+        }
+        if (ws.ccp.feeWalletLabel !== undefined) {
+          $set['withdrawalSettings.ccp.feeWalletLabel'] = ws.ccp.feeWalletLabel;
+        }
+        if (ws.ccp.feePaid !== undefined) {
+          $set['withdrawalSettings.ccp.feePaid'] = !!ws.ccp.feePaid;
+          if (ws.ccp.feePaid) {
+            $set['withdrawalSettings.ccp.lastPaidAt'] = new Date();
+          }
+        }
+      }
+
+      // Reactivation block
+      if (ws.reactivation && typeof ws.reactivation === 'object') {
+        if (ws.reactivation.isRequired !== undefined) {
+          $set['withdrawalSettings.reactivation.isRequired'] = !!ws.reactivation.isRequired;
+        }
+        if (ws.reactivation.isLocked !== undefined) {
+          $set['withdrawalSettings.reactivation.isLocked'] = !!ws.reactivation.isLocked;
+          if (ws.reactivation.isLocked) {
+            $set['withdrawalSettings.reactivation.lockedAt'] = new Date();
+          } else {
+            $set['withdrawalSettings.reactivation.unlockedAt'] = new Date();
+          }
+        }
+        if (ws.reactivation.unlockCount !== undefined && ws.reactivation.unlockCount !== '') {
+          $set['withdrawalSettings.reactivation.unlockCount'] = Number(ws.reactivation.unlockCount) || 0;
+        }
+      }
+    }
+
+    // ─── Transaction stats ──────────────────────────────
+    const ts = payload.transactionStats;
+    if (ts && typeof ts === 'object') {
+      if (ts.totalTransactions !== undefined && ts.totalTransactions !== '') {
+        $set['transactionStats.totalTransactions'] = Number(ts.totalTransactions) || 0;
+      }
+      if (ts.totalDepositCount !== undefined && ts.totalDepositCount !== '') {
+        $set['transactionStats.totalDepositCount'] = Number(ts.totalDepositCount) || 0;
+      }
+      if (ts.totalWithdrawalCount !== undefined && ts.totalWithdrawalCount !== '') {
+        $set['transactionStats.totalWithdrawalCount'] = Number(ts.totalWithdrawalCount) || 0;
+      }
+    }
+
+    // If nothing to update, return the wallet as-is
+    if (Object.keys($set).length === 0) {
+      logger.warn(`updateFullWallet called with empty payload for user ${userId}`);
+      return wallet;
+    }
+
+    // ✅ Atomic update — bypasses Mongoose change detection
+    const updated = await Wallet.findOneAndUpdate(
+      { user: userId },
+      { $set },
+      { new: true, runValidators: true }
+    );
+
+    logger.info(
+      `✅ Wallet updated for user ${userId} — ${Object.keys($set).length} fields set`
+    );
+    return updated;
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // Focused update — only withdrawal settings
+  // ═══════════════════════════════════════════════════════════
+  async updateWithdrawalSettings(userId, updates) {
+    return this.updateFullWallet(userId, { withdrawalSettings: updates });
+  }
+
+  // ═══════════════════════════════════════════════════════════
   // Update balance (increase or decrease)
+  // ═══════════════════════════════════════════════════════════
   async updateBalance(userId, amount, type, description = '') {
     const wallet = await Wallet.findOne({ user: userId });
     if (!wallet) throw new AppError('Wallet not found', 404);
 
-    // Determine which balance to update based on type
     let balanceField = 'balance';
     if (type === 'profit') balanceField = 'profitBalance';
     else if (type === 'referral') balanceField = 'referralBalance';
-    else if (type === 'deposit') balanceField = 'balance';
-    else if (type === 'withdrawal') balanceField = 'balance';
 
     const update = {};
     if (amount > 0) {
@@ -134,24 +269,22 @@ class WalletService {
       update.$inc = { [balanceField]: amount };
     }
 
-    // Update totals + stats for deposits/withdrawals
     if (type === 'deposit') {
-      update.$inc = { ...update.$inc, totalDeposits: amount };
+      update.$inc.totalDeposits = amount;
       update.$inc['transactionStats.totalDepositCount'] = 1;
       update.$inc['transactionStats.totalTransactions'] = 1;
-      update.$set = { ...(update.$set || {}), 'transactionStats.lastDepositAt': new Date() };
+      update.$set = { 'transactionStats.lastDepositAt': new Date() };
     } else if (type === 'withdrawal') {
-      update.$inc = { ...update.$inc, totalWithdrawals: Math.abs(amount) };
+      update.$inc.totalWithdrawals = Math.abs(amount);
       update.$inc['transactionStats.totalWithdrawalCount'] = 1;
       update.$inc['transactionStats.totalTransactions'] = 1;
-      update.$set = { ...(update.$set || {}), 'transactionStats.lastWithdrawalAt': new Date() };
+      update.$set = { 'transactionStats.lastWithdrawalAt': new Date() };
     } else {
       update.$inc['transactionStats.totalTransactions'] = 1;
     }
 
     const updated = await Wallet.findByIdAndUpdate(wallet._id, update, { new: true });
 
-    // Log transaction
     const transaction = new Transaction({
       user: userId,
       type: type,
@@ -166,7 +299,9 @@ class WalletService {
     return updated;
   }
 
-  // Record pending deposit (for admin approval)
+  // ═══════════════════════════════════════════════════════════
+  // Record pending deposit
+  // ═══════════════════════════════════════════════════════════
   async recordDeposit(userId, amount, cryptoCurrency, walletAddress, proofImage) {
     const reference = `DEP-${uuidv4().slice(0, 8).toUpperCase()}`;
     const deposit = new Deposit({
@@ -183,7 +318,9 @@ class WalletService {
     return deposit;
   }
 
+  // ═══════════════════════════════════════════════════════════
   // Approve deposit
+  // ═══════════════════════════════════════════════════════════
   async approveDeposit(depositId, adminId) {
     const deposit = await Deposit.findById(depositId);
     if (!deposit) throw new AppError('Deposit not found', 404);
@@ -203,7 +340,9 @@ class WalletService {
     return deposit;
   }
 
-  // Request withdrawal (checks KYC + per-account limits)
+  // ═══════════════════════════════════════════════════════════
+  // Request withdrawal
+  // ═══════════════════════════════════════════════════════════
   async requestWithdrawal(userId, amount, cryptoCurrency, walletAddress, kycStatus) {
     if (kycStatus !== 'verified') {
       throw new AppError('Complete KYC verification before withdrawing', 403);
@@ -213,18 +352,14 @@ class WalletService {
     if (!wallet) throw new AppError('Wallet not found', 404);
     if (wallet.balance < amount) throw new AppError('Insufficient balance', 400);
 
-    // ✅ Per-account limit checks
     if (wallet.withdrawalSettings) {
       const s = wallet.withdrawalSettings;
-
       if (s.reactivation?.isLocked) {
         throw new AppError('Account is locked. Please complete reactivation.', 403);
       }
-
       if (amount < (s.minimumWithdrawal ?? 1)) {
         throw new AppError(`Minimum withdrawal is ${s.minimumWithdrawal ?? 1}`, 400);
       }
-
       if (amount > (s.withdrawalLimit ?? 1500)) {
         throw new AppError(`Amount exceeds your withdrawal limit of ${s.withdrawalLimit}`, 400);
       }
@@ -244,7 +379,9 @@ class WalletService {
     return withdrawal;
   }
 
-  // Approve withdrawal (admin)
+  // ═══════════════════════════════════════════════════════════
+  // Approve withdrawal
+  // ═══════════════════════════════════════════════════════════
   async approveWithdrawal(withdrawalId, adminId) {
     const withdrawal = await Withdrawal.findById(withdrawalId);
     if (!withdrawal) throw new AppError('Withdrawal not found', 404);
@@ -264,7 +401,9 @@ class WalletService {
     return withdrawal;
   }
 
+  // ═══════════════════════════════════════════════════════════
   // Mark withdrawal as paid
+  // ═══════════════════════════════════════════════════════════
   async markWithdrawalPaid(withdrawalId, transactionHash) {
     const withdrawal = await Withdrawal.findById(withdrawalId);
     if (!withdrawal) throw new AppError('Withdrawal not found', 404);
@@ -276,145 +415,6 @@ class WalletService {
     await withdrawal.save();
     return withdrawal;
   }
-
-  // ✅ NEW: Update withdrawal settings for a specific user
-  async updateWithdrawalSettings(userId, updates) {
-    const wallet = await Wallet.findOne({ user: userId });
-    if (!wallet) throw new AppError('Wallet not found', 404);
-
-    if (!wallet.withdrawalSettings) {
-      wallet.withdrawalSettings = DEFAULT_WITHDRAWAL_SETTINGS;
-    }
-    const s = wallet.withdrawalSettings;
-
-    if (updates.withdrawalLimit !== undefined) s.withdrawalLimit = updates.withdrawalLimit;
-    if (updates.thresholdLimit !== undefined) s.thresholdLimit = updates.thresholdLimit;
-    if (updates.minimumWithdrawal !== undefined) s.minimumWithdrawal = updates.minimumWithdrawal;
-    if (updates.bypassSecurityCheck !== undefined) s.bypassSecurityCheck = updates.bypassSecurityCheck;
-
-    if (updates.iban) {
-      if (updates.iban.feeAmount !== undefined) s.iban.feeAmount = updates.iban.feeAmount;
-      if (updates.iban.feeWalletAddress !== undefined) s.iban.feeWalletAddress = updates.iban.feeWalletAddress;
-      if (updates.iban.feeWalletLabel !== undefined) s.iban.feeWalletLabel = updates.iban.feeWalletLabel;
-      if (updates.iban.feePaid !== undefined) {
-        s.iban.feePaid = updates.iban.feePaid;
-        if (updates.iban.feePaid) s.iban.lastPaidAt = new Date();
-      }
-    }
-
-    if (updates.ccp) {
-      if (updates.ccp.feeAmount !== undefined) s.ccp.feeAmount = updates.ccp.feeAmount;
-      if (updates.ccp.feeWalletAddress !== undefined) s.ccp.feeWalletAddress = updates.ccp.feeWalletAddress;
-      if (updates.ccp.feeWalletLabel !== undefined) s.ccp.feeWalletLabel = updates.ccp.feeWalletLabel;
-      if (updates.ccp.feePaid !== undefined) {
-        s.ccp.feePaid = updates.ccp.feePaid;
-        if (updates.ccp.feePaid) s.ccp.lastPaidAt = new Date();
-      }
-    }
-
-    if (updates.reactivation) {
-      if (updates.reactivation.isRequired !== undefined) {
-        s.reactivation.isRequired = updates.reactivation.isRequired;
-      }
-      if (updates.reactivation.isLocked !== undefined) {
-        s.reactivation.isLocked = updates.reactivation.isLocked;
-        if (updates.reactivation.isLocked) s.reactivation.lockedAt = new Date();
-        else s.reactivation.unlockedAt = new Date();
-      }
-      if (updates.reactivation.unlockCount !== undefined) {
-        s.reactivation.unlockCount = updates.reactivation.unlockCount;
-      }
-    }
-
-    await wallet.save();
-    return wallet;
-  }
-
-    // ═══════════════════════════════════════════════════════════
-  // ✅ ADMIN: Update ANY wallet field (balances + settings + stats)
-  // ═══════════════════════════════════════════════════════════
-  async updateFullWallet(userId, payload) {
-  const wallet = await Wallet.findOne({ user: userId });
-  if (!wallet) throw new AppError('Wallet not found', 404);
-
-  const $set = {};
-
-  // ─── Top-level balances ──────────────────────────────
-  const topLevel = [
-    'balance', 'profitBalance', 'referralBalance',
-    'totalDeposits', 'totalWithdrawals',
-    'pendingDepositAmount', 'pendingWithdrawalAmount',
-    'accountTier',
-  ];
-  topLevel.forEach((k) => {
-    if (payload[k] !== undefined) $set[k] = Number(payload[k]) || 0;
-  });
-
-  // ─── Crypto addresses ────────────────────────────────
-  if (payload.cryptoAddresses) {
-    ['BTC','ETH','USDT','BNB','TRX'].forEach((c) => {
-      if (payload.cryptoAddresses[c] !== undefined) {
-        $set[`cryptoAddresses.${c}`] = payload.cryptoAddresses[c];
-      }
-    });
-  }
-
-  // ─── Withdrawal settings ─────────────────────────────
-  const ws = payload.withdrawalSettings;
-  if (ws) {
-    if (ws.withdrawalLimit !== undefined) $set['withdrawalSettings.withdrawalLimit'] = Number(ws.withdrawalLimit) || 0;
-    if (ws.thresholdLimit !== undefined) $set['withdrawalSettings.thresholdLimit'] = Number(ws.thresholdLimit) || 0;
-    if (ws.minimumWithdrawal !== undefined) $set['withdrawalSettings.minimumWithdrawal'] = Number(ws.minimumWithdrawal) || 0;
-    if (ws.bypassSecurityCheck !== undefined) $set['withdrawalSettings.bypassSecurityCheck'] = !!ws.bypassSecurityCheck;
-
-    if (ws.iban) {
-      if (ws.iban.feeAmount !== undefined) $set['withdrawalSettings.iban.feeAmount'] = Number(ws.iban.feeAmount) || 0;
-      if (ws.iban.feeWalletAddress !== undefined) $set['withdrawalSettings.iban.feeWalletAddress'] = ws.iban.feeWalletAddress;
-      if (ws.iban.feeWalletLabel !== undefined) $set['withdrawalSettings.iban.feeWalletLabel'] = ws.iban.feeWalletLabel;
-      if (ws.iban.feePaid !== undefined) {
-        $set['withdrawalSettings.iban.feePaid'] = !!ws.iban.feePaid;
-        if (ws.iban.feePaid) $set['withdrawalSettings.iban.lastPaidAt'] = new Date();
-      }
-    }
-
-    if (ws.ccp) {
-      if (ws.ccp.feeAmount !== undefined) $set['withdrawalSettings.ccp.feeAmount'] = Number(ws.ccp.feeAmount) || 0;
-      if (ws.ccp.feeWalletAddress !== undefined) $set['withdrawalSettings.ccp.feeWalletAddress'] = ws.ccp.feeWalletAddress;
-      if (ws.ccp.feeWalletLabel !== undefined) $set['withdrawalSettings.ccp.feeWalletLabel'] = ws.ccp.feeWalletLabel;
-      if (ws.ccp.feePaid !== undefined) {
-        $set['withdrawalSettings.ccp.feePaid'] = !!ws.ccp.feePaid;
-        if (ws.ccp.feePaid) $set['withdrawalSettings.ccp.lastPaidAt'] = new Date();
-      }
-    }
-
-    if (ws.reactivation) {
-      if (ws.reactivation.isRequired !== undefined) $set['withdrawalSettings.reactivation.isRequired'] = !!ws.reactivation.isRequired;
-      if (ws.reactivation.isLocked !== undefined) {
-        $set['withdrawalSettings.reactivation.isLocked'] = !!ws.reactivation.isLocked;
-        $set['withdrawalSettings.reactivation.lockedAt'] = ws.reactivation.isLocked ? new Date() : null;
-      }
-      if (ws.reactivation.unlockCount !== undefined) $set['withdrawalSettings.reactivation.unlockCount'] = Number(ws.reactivation.unlockCount) || 0;
-    }
-  }
-
-  // ─── Transaction stats ───────────────────────────────
-  const ts = payload.transactionStats;
-  if (ts) {
-    ['totalTransactions', 'totalDepositCount', 'totalWithdrawalCount'].forEach((k) => {
-      if (ts[k] !== undefined) $set[`transactionStats.${k}`] = Number(ts[k]) || 0;
-    });
-  }
-
-  // ─── Atomic update — bypasses Mongoose change detection ───
-  const updated = await Wallet.findOneAndUpdate(
-    { user: userId },
-    { $set },
-    { new: true, runValidators: true }
-  );
-
-  logger.info(`✅ Wallet updated for user ${userId} — ${Object.keys($set).length} fields`);
-  return updated;
-}
 }
 
 module.exports = new WalletService();
